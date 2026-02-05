@@ -1,0 +1,9 @@
+{
+  "name": "just-interceptor",
+  "description": "Intercepts raw CLI commands and redirects to project-standard just recipes",
+  "author": {
+    "name": "kettleofketchup"
+  },
+  "homepage": "https://github.com/kettleofketchup/claude-just-interceptor",
+  "version": "1.0.0"
+}

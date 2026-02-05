@@ -2,21 +2,8 @@
 # just-interceptor: Claude Code PreToolUse hook
 # Blocks raw CLI commands and redirects to project-standard just recipes.
 #
-# Usage: Point .claude/settings.json hook to this script.
-#        Place a just.json in the project's .claude/hooks/ directory.
-#
-# Config: .claude/hooks/just.json
-# {
-#   "redirects": [
-#     {
-#       "category": "npm",
-#       "enabled": true,
-#       "pattern": "npm install",
-#       "just_command": "just npm::install",
-#       "reason": "Project-standard npm install"
-#     }
-#   ]
-# }
+# Install: /plugin install https://github.com/kettleofketchup/claude-just-interceptor.git
+# Config:  .claude/just-interceptor.json in your project root
 set -uo pipefail
 
 # Read hook event JSON from stdin
@@ -29,9 +16,9 @@ if [[ -z "$COMMAND" ]]; then
   exit 0
 fi
 
-# Look for just.json in the project's .claude/hooks/ directory
+# Look for project config
 # The hook runs from the project root (PWD)
-CONFIG_FILE="${PWD}/.claude/hooks/just.json"
+CONFIG_FILE="${PWD}/.claude/just-interceptor.json"
 
 if [[ ! -f "$CONFIG_FILE" ]]; then
   exit 0

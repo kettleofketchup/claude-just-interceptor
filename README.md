@@ -1,31 +1,18 @@
 # just-interceptor
 
-Claude Code hook that intercepts raw CLI commands and redirects to project-standard `just` recipes.
+Claude Code plugin that intercepts raw CLI commands and redirects to project-standard [just](https://github.com/casey/just) recipes.
 
-## Setup
+When Claude tries to run `npm install`, `docker compose up`, or any command you've mapped, the hook denies it and tells Claude to use the corresponding `just` recipe instead.
 
-1. Add the hook to your project's `.claude/settings.json`:
+## Install
 
-```json
-{
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/home/kettle/git_repos/claude/just-interceptor/intercept.sh",
-            "timeout": 5
-          }
-        ]
-      }
-    ]
-  }
-}
+```
+/plugin install https://github.com/kettleofketchup/claude-just-interceptor.git
 ```
 
-2. Create `.claude/hooks/just.json` in your project with command mappings:
+## Project Setup
+
+Create `.claude/just-interceptor.json` in your project root with command mappings:
 
 ```json
 {
@@ -36,6 +23,13 @@ Claude Code hook that intercepts raw CLI commands and redirects to project-stand
       "pattern": "^npm install",
       "just_command": "just npm::install",
       "reason": "Project-standard npm install with correct working directory"
+    },
+    {
+      "category": "docker",
+      "enabled": true,
+      "pattern": "^docker compose up",
+      "just_command": "just docker::up",
+      "reason": "Uses project-specific compose configuration"
     }
   ]
 }
@@ -55,6 +49,14 @@ Claude Code hook that intercepts raw CLI commands and redirects to project-stand
 
 1. Claude Code fires a `PreToolUse` event before every Bash tool call
 2. The hook reads the command from stdin JSON
-3. Checks patterns in the project's `.claude/hooks/just.json`
-4. **Match**: Returns deny with redirect message
-5. **No match**: Exits silently, command proceeds
+3. Checks patterns in the project's `.claude/just-interceptor.json`
+4. **Match**: Returns deny with redirect message pointing to the just recipe
+5. **No match**: Exits silently, command proceeds normally
+
+## Requirements
+
+- [jq](https://jqlang.github.io/jq/) must be available on PATH
+
+## License
+
+MIT
