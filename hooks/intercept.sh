@@ -2,7 +2,8 @@
 # just-interceptor: Claude Code PreToolUse hook
 # Blocks raw CLI commands and redirects to project-standard just recipes.
 #
-# Install: /plugin install https://github.com/kettleofketchup/claude-just-interceptor.git
+# Install: /plugin marketplace add kettleofketchup/claude-just-interceptor
+#          /plugin install just-interceptor@claude-just-interceptor
 # Config:  .claude/just-interceptor.json in your project root
 set -uo pipefail
 

@@ -6,8 +6,11 @@ When Claude tries to run `npm install`, `docker compose up`, or any command you'
 
 ## Install
 
+Add the marketplace and install:
+
 ```
-/plugin install https://github.com/kettleofketchup/claude-just-interceptor.git
+/plugin marketplace add kettleofketchup/claude-just-interceptor
+/plugin install just-interceptor@claude-just-interceptor
 ```
 
 ## Project Setup
@@ -55,6 +58,7 @@ Create `.claude/just-interceptor.json` in your project root with command mapping
 
 ## Requirements
 
+- [just](https://github.com/casey/just) must be available on PATH
 - [jq](https://jqlang.github.io/jq/) must be available on PATH
 
 ## License
