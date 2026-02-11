@@ -1,9 +1,9 @@
 {
   "name": "just-interceptor",
-  "description": "Intercepts raw CLI commands and redirects to project-standard just recipes",
+  "description": "Intercepts raw CLI commands and redirects to project-standard just recipes. Includes just skill for bootstrapping, modules, groups, and syntax.",
   "author": {
     "name": "kettleofketchup"
   },
   "homepage": "https://github.com/kettleofketchup/claude-just-interceptor",
-  "version": "1.0.0"
+  "version": "1.1.0"
 }
